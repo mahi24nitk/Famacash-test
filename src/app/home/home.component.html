@@ -1,0 +1,68 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-primary">
+	<a class="navbar-brand" routerLink="/home">Employee App</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNav">
+		<ul class="navbar-nav">
+			
+		</ul>
+	</div>
+</nav>
+
+<div class="row text-center m-3">
+
+	<button mat-raised-button color="primary" (click)="onAddEmployee('add')">Add employee</button>
+	
+</div>
+
+<div class=" container-fluid mat-elevation-z8">
+	<mat-form-field class="p-2 ">
+		<mat-label>Filter by name, email, mobile</mat-label>
+		<input matInput (keyup)="applyFilter($event)" autocomplete="false" placeholder="Mahendra, m@gmail.com, 99999999" #input>
+	</mat-form-field> 
+	<table mat-table [dataSource]="dataSource" matSort>
+
+		<!-- Position Column -->
+		<ng-container matColumnDef="firstName">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+			<td mat-cell *matCellDef="let element"> {{element?.firstName}} </td>
+		</ng-container>
+
+		<!-- Name Column -->
+		<ng-container matColumnDef="lastName">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+			<td mat-cell *matCellDef="let element"> {{element?.lastName}} </td>
+		</ng-container>
+
+		<!-- Weight Column -->
+		<ng-container matColumnDef="email">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+			<td mat-cell *matCellDef="let element"> {{element?.email}} </td>
+		</ng-container>
+
+		<!-- Symbol Column -->
+		<ng-container matColumnDef="mobile">
+			<th mat-header-cell *matHeaderCellDef mat-sort-header> Mobile </th>
+			<td mat-cell *matCellDef="let element"> {{element?.mobile}} </td>
+		</ng-container>
+
+		<!-- action Column -->
+		<ng-container matColumnDef="action">
+			<th mat-header-cell *matHeaderCellDef> Action </th>
+			<td mat-cell *matCellDef="let element">
+				
+				<button mat-raised-button color="warn" (click)="onDeleteEmployee(element)">Delete</button> 
+				
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+	</table>
+	<div *ngIf="!dataSource.data.length" class="text-center m-5">
+		<h3>Please add an employee to see the employees list</h3>
+	</div>
+
+	<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

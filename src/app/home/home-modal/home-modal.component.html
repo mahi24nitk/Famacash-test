@@ -1,0 +1,52 @@
+
+
+<div class="row mt-1" >
+	<div class="col-md-1">
+		
+	</div>
+	<div class="col-md-10" >
+		<form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+			<mat-form-field class ="inputWidth">
+				<mat-label>First Name</mat-label>
+				<input formControlName="firstName" matInput type="text">
+				<mat-error *ngIf="employeeForm.get('firstName')?.errors?.required">First Name can not be blank</mat-error>
+
+			</mat-form-field>
+			<mat-form-field class ="inputWidth">
+				<mat-label>Last Name</mat-label>
+				<input formControlName="lastName" matInput type="text">
+				<mat-error *ngIf="employeeForm.get('lastName')?.errors?.required">Last Name can not be blank</mat-error>
+
+			</mat-form-field>
+
+			<mat-form-field class ="inputWidth">
+				<mat-label>Email</mat-label>
+				<input formControlName="email" matInput type="email">
+				<mat-error *ngIf="employeeForm.get('email')?.errors?.required">Email can not be blank</mat-error>
+				<mat-error *ngIf="employeeForm.get('email')?.errors?.email">Invalid email address</mat-error>
+			</mat-form-field>
+
+			<mat-form-field class ="inputWidth">
+				<mat-label>Mobile</mat-label>
+				<input formControlName="mobile" matInput type="number">
+				<mat-error *ngIf="employeeForm.get('mobile')?.errors?.required">Mobile can not be blank</mat-error>
+
+
+			</mat-form-field>
+
+
+
+			<br>
+
+
+         <span class="mx-2"><button mat-raised-button color="primary" type="submit" [disabled]="employeeForm.invalid">Submit</button></span>
+         <span><button mat-raised-button color="warn" mat-dialog-close>Close</button></span>
+			
+			
+
+		</form>
+	</div>
+	<div class="col-md-1">
+		
+	</div>
+</div>
